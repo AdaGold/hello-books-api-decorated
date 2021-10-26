@@ -25,7 +25,7 @@ def handle_books():
         db.session.add(new_book)
         db.session.commit()
 
-        return make_response(f"Book {new_book.title} successfully created", 201)
+        return jsonify(f"Book {new_book.title} successfully created"), 201
 
 
 @books_bp.route("/<book_id>", methods=["GET", "PUT", "DELETE"])
@@ -46,8 +46,8 @@ def handle_book(book_id):
 
         db.session.commit()
 
-        return make_response(f"Book #{book.id} successfully updated")
+        return jsonify(f"Book #{book.id} successfully updated")
     elif request.method == "DELETE":
         db.session.delete(book)
         db.session.commit()
-        return make_response(f"Book #{book.id} successfully deleted")
+        return jsonify(f"Book #{book.id} successfully deleted")
