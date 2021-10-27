@@ -17,7 +17,9 @@ class Book(db.Model):
 
     @classmethod
     def from_dict(cls, values):
-        return Book(**values)
+        columns = set(cls.COLUMNS)
+        filtered = {k:v for k, v in values.items() if k in columns}
+        return cls(**filtered)
 
     def update_from_dict(self, values):
         for column in self.COLUMNS:
